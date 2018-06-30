@@ -1,0 +1,2 @@
+- Zmieniony algorytm wczytywania z plikow (Data.java)
+- Nadal wysypuje na starcie 
