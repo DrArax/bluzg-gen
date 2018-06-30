@@ -1,5 +1,7 @@
 package com.drarax.bluzggen.feature;
 
+import android.content.Context;
+
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
@@ -10,11 +12,11 @@ public class Generator {
     private Random rand;
     private Data data;
 
-    Generator() throws FileNotFoundException {
+    Generator(Context context) throws FileNotFoundException {
         scan = new Scanner(System.in);
         rand = new Random();
-        data = new Data("Data/rzeczownik.txt", "Data/przymiotnik.txt");
-        data.Wczytaj();
+        data = new Data("rzeczownik.txt", "przymiotnik.txt", context);
+        data.Wczytaj(0);
     }
 
     public String Generuj() {
@@ -39,8 +41,7 @@ public class Generator {
                 break;
         }
 
-        //String bluzga = String.join(" ", przym, rzecz);
-        String bluzga = "B";
+        String bluzga = String.join(" ", przym, rzecz);
 
         return bluzga;
     }

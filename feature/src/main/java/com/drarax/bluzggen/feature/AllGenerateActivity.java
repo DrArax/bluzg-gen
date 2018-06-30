@@ -13,11 +13,9 @@ public class AllGenerateActivity extends AppCompatActivity {
         GenerujBluzge();
     }
 
-    private static final String finalBluzga = "Bluzga";
-
     public void GenerujBluzge() {
-        String bluzg = getIntent().getStringExtra(finalBluzga);
+        String bluzg = getIntent().getStringExtra("finalBluzga");
         TextView bluzga = (TextView) findViewById(R.id.bluzg);
-        bluzga.setText(finalBluzga);
+        bluzga.setText(bluzg);
     }
 }

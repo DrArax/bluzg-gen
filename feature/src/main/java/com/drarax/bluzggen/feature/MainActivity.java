@@ -1,5 +1,6 @@
 package com.drarax.bluzggen.feature;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +13,9 @@ import java.io.FileNotFoundException;
 public class MainActivity extends AppCompatActivity {
 
     private Generator gen;
-    private static final String finalBluzga = "Bluzga";
 
     MainActivity() throws FileNotFoundException {
-        gen = new Generator();
+        gen = new Generator(getApplicationContext());
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 String bluzga = gen.Generuj();
 
                 Intent genAll = new Intent(getApplicationContext(), AllGenerateActivity.class);
-                genAll.putExtra(finalBluzga, bluzga);
+                genAll.putExtra("finalBluzga", bluzga);
                 startActivity(genAll);
             }
         });

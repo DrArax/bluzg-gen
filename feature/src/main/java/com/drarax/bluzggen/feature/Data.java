@@ -1,10 +1,11 @@
 package com.drarax.bluzggen.feature;
 
-import java.io.File;
+import android.content.Context;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Data {
 
@@ -14,16 +15,20 @@ public class Data {
     private String rzeczownikFile;
     private String przymiotnikFile;
 
-    Data(String rFile, String pFile) {
+    private Context context;
+
+    Data(String rFile, String pFile, Context context) {
         rzeczownik = new LinkedList<LinkedList<String>>();
         przymiotnik = new LinkedList<LinkedList<String>>();
 
         rzeczownikFile = rFile;
         przymiotnikFile = pFile;
+
+        this.context = context;
     }
 
     public boolean Wczytaj() throws FileNotFoundException {
-        int rz = 0;
+        /*int rz = 0;
         int pr = 0;
 
         try(Scanner readRzeczownik = new Scanner(new File(rzeczownikFile))) {
@@ -54,7 +59,55 @@ public class Data {
         }
 
         //readRzeczownik.close();
-        //readPrzymiotnik.close();
+        //readPrzymiotnik.close();*/
         return true;
+    }
+    public void Wczytaj(int temp) throws FileNotFoundException {
+        String przymWhole = "";
+        String rzeczWhole = "";
+
+        try {
+            InputStream is = context.getAssets().open(rzeczownikFile);
+            byte[] rzeczBuffer = new byte[is.available()];
+            is.read(rzeczBuffer);
+            is.close();
+            rzeczWhole = new String(rzeczBuffer);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            InputStream is = context.getAssets().open(przymiotnikFile);
+            byte[] przymBuffer = new byte[is.available()];
+            is.read(przymBuffer);
+            is.close();
+            przymWhole = new String(przymBuffer);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        Podziel(rzeczWhole, przymWhole);
+    }
+
+    private void Podziel(String rzecz, String przym) {
+        int rzeczCurrent = 0;
+        int przymCurrent = 0;
+
+        String[] rzeczTempBuffer = rzecz.split("/");
+        rzeczownik.add(new LinkedList<String>());
+        for (int rz = 0; rz < rzeczTempBuffer.length / 2; rz++) {
+            rzeczownik.get(rz).add(rzeczTempBuffer[rzeczCurrent]);
+            rzeczownik.get(rz).add(rzeczTempBuffer[rzeczCurrent+1]);
+            rzeczCurrent += 2;
+        }
+
+        String[] przymTempBuffer = przym.split("/");
+        przymiotnik.add(new LinkedList<String>());
+        for (int prz = 0; prz < przymTempBuffer.length / 3; prz++) {
+            przymiotnik.get(prz).add(przymTempBuffer[przymCurrent]);
+            przymiotnik.get(prz).add(przymTempBuffer[przymCurrent+1]);
+            przymiotnik.get(prz).add(przymTempBuffer[przymCurrent+2]);
+            przymCurrent += 3;
+        }
     }
 }
