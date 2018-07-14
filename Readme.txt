@@ -1,3 +1,3 @@
 - Wszystko powinno dzialac jak nalezy
 - Dodane kopiowanie do schowka (dziala)
-- Rozbudowac aplikacje.
+- Rozbudowac aplikacje
