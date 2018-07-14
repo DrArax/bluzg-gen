@@ -14,14 +14,20 @@ public class MainActivity extends AppCompatActivity {
 
     private Generator gen;
 
-    MainActivity() throws FileNotFoundException {
-        gen = new Generator(getApplicationContext());
-    }
+    public Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.context = getApplicationContext();
+        try {
+            gen = new Generator(context);
+        }
+        catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Button first_cat = (Button) findViewById(R.id.first_cat_bttn);
         first_cat.setOnClickListener(new OnClickListener() {
@@ -29,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String bluzga = gen.Generuj();
 
-                Intent genAll = new Intent(getApplicationContext(), AllGenerateActivity.class);
+                Intent genAll = new Intent(context, AllGenerateActivity.class);
                 genAll.putExtra("finalBluzga", bluzga);
                 startActivity(genAll);
             }

@@ -1,11 +1,14 @@
 package com.drarax.bluzggen.feature;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
+
 
 public class Data {
 
@@ -16,6 +19,8 @@ public class Data {
     private String przymiotnikFile;
 
     private Context context;
+
+    public static final String tag = "Data";
 
     Data(String rFile, String pFile, Context context) {
         rzeczownik = new LinkedList<LinkedList<String>>();
@@ -66,27 +71,36 @@ public class Data {
         String przymWhole = "";
         String rzeczWhole = "";
 
-        try {
-            InputStream is = context.getAssets().open(rzeczownikFile);
-            byte[] rzeczBuffer = new byte[is.available()];
-            is.read(rzeczBuffer);
-            is.close();
-            rzeczWhole = new String(rzeczBuffer);
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        if (context != null) {
+            AssetManager assets = context.getAssets();
 
-        try {
-            InputStream is = context.getAssets().open(przymiotnikFile);
-            byte[] przymBuffer = new byte[is.available()];
-            is.read(przymBuffer);
-            is.close();
-            przymWhole = new String(przymBuffer);
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                InputStream is1 = assets.open(rzeczownikFile);
+                byte[] rzeczBuffer = new byte[is1.available()];
+                is1.read(rzeczBuffer);
+                is1.close();
+                rzeczWhole = new String(rzeczBuffer);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(tag, "Reczownik file error.");
+            }
 
-        Podziel(rzeczWhole, przymWhole);
+            try {
+                InputStream is2 = assets.open(przymiotnikFile);
+                byte[] przymBuffer = new byte[is2.available()];
+                is2.read(przymBuffer);
+                is2.close();
+                przymWhole = new String(przymBuffer);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(tag, "Przymiotnik file error.");
+            }
+
+            Podziel(rzeczWhole, przymWhole);
+        }
+        else {
+            Log.e(tag, "Null context");
+        }
     }
 
     private void Podziel(String rzecz, String przym) {
@@ -94,16 +108,16 @@ public class Data {
         int przymCurrent = 0;
 
         String[] rzeczTempBuffer = rzecz.split("/");
-        rzeczownik.add(new LinkedList<String>());
         for (int rz = 0; rz < rzeczTempBuffer.length / 2; rz++) {
+            rzeczownik.add(new LinkedList<String>());
             rzeczownik.get(rz).add(rzeczTempBuffer[rzeczCurrent]);
             rzeczownik.get(rz).add(rzeczTempBuffer[rzeczCurrent+1]);
             rzeczCurrent += 2;
         }
 
         String[] przymTempBuffer = przym.split("/");
-        przymiotnik.add(new LinkedList<String>());
         for (int prz = 0; prz < przymTempBuffer.length / 3; prz++) {
+            przymiotnik.add(new LinkedList<String>());
             przymiotnik.get(prz).add(przymTempBuffer[przymCurrent]);
             przymiotnik.get(prz).add(przymTempBuffer[przymCurrent+1]);
             przymiotnik.get(prz).add(przymTempBuffer[przymCurrent+2]);
