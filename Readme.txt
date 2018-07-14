@@ -1,2 +1,3 @@
-- Zmieniony algorytm wczytywania z plikow (Data.java)
-- Nadal wysypuje na starcie 
+- Wszystko powinno dzialac jak nalezy
+- Dodane kopiowanie do schowka (dziala)
+- Rozbudowac aplikacje
