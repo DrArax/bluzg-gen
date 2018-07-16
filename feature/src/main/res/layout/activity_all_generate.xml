@@ -12,26 +12,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gen_bluzg"
+        android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="0.359" />
 
     <Button
         android:id="@+id/copy_bttn"
-        android:layout_width="150sp"
-        android:layout_height="50sp"
-        android:layout_marginTop="8dp"
+        android:layout_width="120sp"
+        android:layout_height="40sp"
         android:background="@color/buttonColor"
         android:text="@string/copy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bluzg"
-        app:layout_constraintVertical_bias="0.659" />
+        app:layout_constraintTop_toBottomOf="@+id/gen_again_bttn"
+        app:layout_constraintVertical_bias="0.354" />
+
+    <Button
+        android:id="@+id/gen_again_bttn"
+        android:layout_width="180sp"
+        android:layout_height="60sp"
+        android:color="@color/buttonColor"
+        android:text="@string/gen_again"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.236" />
 
 </android.support.constraint.ConstraintLayout>

@@ -22,6 +22,14 @@ public class AllGenerateActivity extends AppCompatActivity {
         other = new Inne();
         context = getApplicationContext();
 
+        Button gen_again = (Button) findViewById(R.id.gen_again_bttn);
+        gen_again.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GenerujBluzge();
+            }
+        });
+
         Button copy = (Button) findViewById(R.id.copy_bttn);
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +40,8 @@ public class AllGenerateActivity extends AppCompatActivity {
     }
 
     public void GenerujBluzge() {
-        fBluzga = getIntent().getStringExtra("finalBluzga");
+        Generator gen = new Generator();
+        fBluzga = gen.Generuj();
         TextView bluzga = (TextView) findViewById(R.id.bluzg);
         bluzga.setText(fBluzga);
     }

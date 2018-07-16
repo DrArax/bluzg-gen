@@ -12,8 +12,6 @@ import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Generator gen;
-
     public Context context;
 
     @Override
@@ -23,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.context = getApplicationContext();
         try {
-            gen = new Generator(context);
+            Globals.mData = new Data("rzeczownik.txt", "przymiotnik.txt", context);
+            Globals.mData.Wczytaj();
         }
         catch(FileNotFoundException e) {
             e.printStackTrace();
@@ -33,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
         first_cat.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Generator gen = new Generator();
                 String bluzga = gen.Generuj();
 
                 Intent genAll = new Intent(context, AllGenerateActivity.class);
-                genAll.putExtra("finalBluzga", bluzga);
                 startActivity(genAll);
             }
         });

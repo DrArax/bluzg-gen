@@ -32,42 +32,7 @@ public class Data {
         this.context = context;
     }
 
-    public boolean Wczytaj() throws FileNotFoundException {
-        /*int rz = 0;
-        int pr = 0;
-
-        try(Scanner readRzeczownik = new Scanner(new File(rzeczownikFile))) {
-
-            while (readRzeczownik.hasNextLine()) {
-                String[] tempRzecz = readRzeczownik.nextLine().split("/");
-                rzeczownik.add(new LinkedList<String>());
-                rzeczownik.get(rz).add(tempRzecz[0]);
-                rzeczownik.get(rz).add(tempRzecz[1]);
-                rz++;
-            }
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-
-        try(Scanner readPrzymiotnik = new Scanner(new File(przymiotnikFile))) {
-
-            while (readPrzymiotnik.hasNextLine()) {
-                String[] tempPrzym = readPrzymiotnik.nextLine().split("/");
-                przymiotnik.add(new LinkedList<String>());
-                for (int i = 0; i < 3; i++) {
-                    przymiotnik.get(pr).add(tempPrzym[i]);
-                }
-                pr++;
-            }
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-
-        //readRzeczownik.close();
-        //readPrzymiotnik.close();*/
-        return true;
-    }
-    public void Wczytaj(int temp) throws FileNotFoundException {
+    public void Wczytaj() throws FileNotFoundException {
         String przymWhole = "";
         String rzeczWhole = "";
 
