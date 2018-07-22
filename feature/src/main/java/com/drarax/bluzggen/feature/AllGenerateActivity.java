@@ -1,6 +1,7 @@
 package com.drarax.bluzggen.feature;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +13,13 @@ public class AllGenerateActivity extends AppCompatActivity {
     private Inne other;
     private String fBluzga;
     private Context context;
+    private String currentCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_generate);
+        currentCat = getIntent().getStringExtra("kategoria");
         GenerujBluzge();
 
         other = new Inne();
@@ -27,6 +30,7 @@ public class AllGenerateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 GenerujBluzge();
+                onLowMemory();
             }
         });
 
@@ -41,8 +45,9 @@ public class AllGenerateActivity extends AppCompatActivity {
 
     public void GenerujBluzge() {
         Generator gen = new Generator();
-        fBluzga = gen.Generuj();
+        fBluzga = gen.Generuj(currentCat);
         TextView bluzga = (TextView) findViewById(R.id.bluzg);
         bluzga.setText(fBluzga);
+        gen = null;
     }
 }

@@ -1,37 +1,86 @@
 package com.drarax.bluzggen.feature;
 
+import android.util.Log;
+
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Generator {
 
-    public String Generuj() {
+    public String Generuj(String cat) {
         Random rand = new Random();
+        LinkedList<LinkedList<String>> catPointer = new LinkedList<>();
+        String bluzga = "";
 
-        int randRzecz = rand.nextInt(Globals.mData.rzeczownik.size());
+        if (cat.equals("wszystkie"))
+            catPointer = Globals.mData.getRzeczownik();
 
-        String rzecz = Globals.mData.rzeczownik.get(randRzecz-1).get(0);
+        if (cat.equals("zwierzeta"))
+            catPointer = Globals.mData.getRzeczownik_zwierzeta();
 
-        int randPrzym = rand.nextInt(Globals.mData.przymiotnik.size());
-        String przym = "";
+        if (catPointer != null) {
+            int randRzecz = rand.nextInt(catPointer.size());
 
-        switch(Globals.mData.rzeczownik.get(randRzecz-1).get(1)) {
-            case "M":
-                przym = Globals.mData.przymiotnik.get(randPrzym).get(0);
-                break;
+            String rzecz = "";
+            if (catPointer.get(randRzecz).get(0) != null) {
+                rzecz = catPointer.get(randRzecz).get(0);
+            }
 
-            case "Z":
-                przym = Globals.mData.przymiotnik.get(randPrzym).get(1);
-                break;
+            int randPrzym = rand.nextInt(Globals.mData.getPrzymiotnik().size());
 
-            case "N":
-                przym = Globals.mData.przymiotnik.get(randPrzym).get(2);
-                break;
+            String przym = "";
+            if (Globals.mData.getPrzymiotnik().get(randPrzym) != null) {
+                przym = Globals.mData.getPrzymiotnik().get(randPrzym);
+            }
+
+            if (catPointer.get(randRzecz).get(1) != null) {
+                przym = Odmien(przym, catPointer.get(randRzecz).get(1));
+            }
+
+            bluzga = new String(przym + " " + rzecz);
         }
-
-        //String bluzga = String.join(" ", przym, rzecz);       // min API26
-        String bluzga = new String(przym + " " + rzecz);
 
         return bluzga;
     }
 
+    private String Odmien(String przym, String rodzaj) {
+        char[] przymChar = przym.toCharArray();
+        char lastLetter = 0;
+
+        switch(rodzaj) {
+            case "M":
+                if (przym.contains("i") && przym.indexOf("i") == przym.length() - 1) {
+                    lastLetter = 'i';
+                }
+                else {
+                    lastLetter = 'y';
+                }
+                break;
+
+            case "Z":
+                lastLetter = 'a';
+                break;
+
+            case "N":
+                if (przym.contains("i") && przym.indexOf("i") == przym.length() - 1) {
+                    char[] tempCharArray = new char[przymChar.length + 1];
+                    for (int i = 0; i < przymChar.length; i++) {
+                        tempCharArray[i] = przymChar[i];
+                    }
+                    przymChar = null;
+                    przymChar = tempCharArray;
+                }
+                lastLetter = 'e';
+                break;
+        }
+
+        if (new String(przymChar).contains(" ") && przymChar[new String(przymChar).indexOf(" ") - 1] == 'y')  {
+            przymChar[new String(przymChar).indexOf(" ") - 1] = lastLetter;
+        }
+        else {
+            przymChar[przymChar.length - 1] = lastLetter;
+        }
+
+        return new String(przymChar);
+    }
 }

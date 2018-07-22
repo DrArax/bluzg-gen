@@ -1,6 +1,7 @@
 <resources>
     <string name="cat_text">Kategorie: </string>
     <string name="first_cat">Wszystkie</string>
+    <string name="second_cat">Zwierzeta</string>
     <string name="gen_bluzg">Bluzga</string>
     <string name="copy">Kopiuj</string>
     <string name="gen_again">Generuj Ponownie</string>

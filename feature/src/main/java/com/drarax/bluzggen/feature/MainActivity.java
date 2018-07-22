@@ -32,10 +32,18 @@ public class MainActivity extends AppCompatActivity {
         first_cat.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Generator gen = new Generator();
-                String bluzga = gen.Generuj();
-
                 Intent genAll = new Intent(context, AllGenerateActivity.class);
+                genAll.putExtra("kategoria", "wszystkie");
+                startActivity(genAll);
+            }
+        });
+
+        Button second_cat = (Button) findViewById(R.id.second_cat_bttn);
+        second_cat.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent genAll = new Intent(context, AllGenerateActivity.class);
+                genAll.putExtra("kategoria", "zwierzeta");
                 startActivity(genAll);
             }
         });

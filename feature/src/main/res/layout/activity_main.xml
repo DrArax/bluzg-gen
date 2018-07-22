@@ -24,14 +24,26 @@
 
     <Button
         android:id="@+id/first_cat_bttn"
-        android:text="@string/first_cat"
         android:layout_width="250sp"
         android:layout_height="80sp"
         android:background="@color/buttonColor"
+        android:text="@string/first_cat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="0.287" />
+
+    <Button
+        android:id="@+id/second_cat_bttn"
+        android:layout_width="250sp"
+        android:layout_height="80sp"
+        android:background="@color/buttonColor"
+        android:text="@string/second_cat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
 </android.support.constraint.ConstraintLayout>
